@@ -1,0 +1,11 @@
+.content-tab {
+  @apply bg-white rounded-xl p-8;
+}
+
+.label-primary {
+  @apply block text-lg mb-1 font-medium;
+}
+
+.input-primary {
+  @apply block bg-gray-200 w-full rounded-xl h-10 p-2 outline-none border-2 focus:border-blue-500 transition-all ease-linear duration-300 focus:shadow-xl text-sm font-light;
+}
