@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-const InputField = ({ label, type, name, id, autoComplete, value, onChange }) => {
+const InputGroup = ({ label, type, name, id, autoComplete, value, onChange }) => {
   return (
     <div>
       <label htmlFor={id} className="label-primary">
@@ -18,7 +18,7 @@ const InputField = ({ label, type, name, id, autoComplete, value, onChange }) =>
   );
 };
 
-InputField.propTypes = {
+InputGroup.propTypes = {
   label: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
@@ -28,4 +28,4 @@ InputField.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export default InputField;
+export default InputGroup;

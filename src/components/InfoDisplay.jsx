@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-const Contacts = ({ title, icon }) => {
+const InfoDisplay = ({ title, icon }) => {
   return (
     <div className="flex items-center gap-2">
       {icon}
@@ -8,9 +8,9 @@ const Contacts = ({ title, icon }) => {
   );
 };
 
-Contacts.propTypes = {
+InfoDisplay.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
 };
 
-export default Contacts;
+export default InfoDisplay;
