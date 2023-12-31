@@ -3,7 +3,7 @@
 }
 
 .label-primary {
-  @apply block text-lg mb-1 font-medium;
+  @apply inline-block text-lg mb-1 font-medium;
 }
 
 .input-primary {
