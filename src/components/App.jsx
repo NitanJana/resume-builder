@@ -1,43 +1,31 @@
+import EduIcon from '../assets/edu_icon.svg?react';
+import ExpIcon from '../assets/exp_icon.svg?react';
+import InputField from './InputField';
+import ContentTab from './ContentTab';
+
 import '../styles/App.css';
 
 function App() {
   return (
-    <div className="w-full h-screen bg-gray-100 grid grid-cols-[1fr_4fr_5fr]">
+    <div className="w-full h-screen bg-gray-100 grid grid-cols-[1fr_4fr_5fr] font-poppins">
       <div className=""></div>
 
       <section className="p-8 flex flex-col gap-8">
         <div className="content-tab ">
           <h2 className="text-2xl font-bold mb-5">Personal Details</h2>
           <div className="flex flex-col gap-3">
-            <div>
-              <label htmlFor="fullName" className="label-primary">
-                Full Name
-              </label>
-              <input autoComplete="name" type="text" name="fullName" id="fullName" className="input-primary" />
-            </div>
+            <InputField label="Full Name" type="text" name="fullName" id="fullName" autoComplete="name" />
 
-            <div>
-              <label htmlFor="email" className="label-primary">
-                Email
-              </label>
-              <input autoComplete="email" type="email" name="email" id="email" className="input-primary" />
-            </div>
+            <InputField label="Email" type="email" name="email" id="email" autoComplete="email" />
 
-            <div>
-              <label htmlFor="phNumber" className="label-primary">
-                Phone Number
-              </label>
-              <input autoComplete="tel" type="tel" name="phNumber" id="phNumber" className="input-primary" />
-            </div>
+            <InputField label="Phone Number" type="tel" name="phNumber" id="phNumber" autoComplete="tel" />
 
-            <div>
-              <label htmlFor="address" className="label-primary">
-                Address
-              </label>
-              <input autoComplete="street-address" type="text" name="address" id="address" className="input-primary" />
-            </div>
+            <InputField label="Address" type="text" name="address" id="address" autoComplete="street-address" />
           </div>
         </div>
+
+        <ContentTab icon={<EduIcon />} title="Education" />
+        <ContentTab icon={<ExpIcon />} title="Experience" />
       </section>
 
       <section className=""></section>
