@@ -16,7 +16,6 @@ import '../styles/App.css';
 function App() {
   const [activeCard, setActiveCard] = useState('personal');
 
-  // Separate state for each tab's data
   const [personalData, setPersonalData] = useState({
     fullName: '',
     email: '',
@@ -52,20 +51,90 @@ function App() {
 
   const inputConfigurationsMap = {
     personal: [
-      { label: 'Full Name', type: 'text', name: 'fullName', id: 'fullName', autoComplete: 'name' },
-      { label: 'Email', type: 'email', name: 'email', id: 'email', autoComplete: 'email' },
-      { label: 'Phone Number', type: 'tel', name: 'phoneNumber', id: 'phoneNumber', autoComplete: 'tel' },
-      { label: 'Address', type: 'text', name: 'address', id: 'address', autoComplete: 'street-address' },
+      {
+        label: 'Full Name',
+        type: 'text',
+        name: 'fullName',
+        id: 'fullName',
+        placeholder: 'First and Last Name',
+        autoComplete: 'name',
+      },
+      {
+        label: 'Email',
+        type: 'email',
+        name: 'email',
+        id: 'email',
+        placeholder: 'Enter Email',
+        autoComplete: 'email',
+      },
+      {
+        label: 'Phone Number',
+        type: 'tel',
+        name: 'phoneNumber',
+        id: 'phoneNumber',
+        placeholder: 'Enter Phone Number',
+        autoComplete: 'tel',
+      },
+      {
+        label: 'Address',
+        type: 'text',
+        name: 'address',
+        id: 'address',
+        placeholder: 'City, Country',
+        autoComplete: 'street-address',
+      },
     ],
     education: [
-      { label: 'Degree', type: 'text', name: 'degree', id: 'degree', autoComplete: 'education-level' },
-      { label: 'School', type: 'text', name: 'school', id: 'school', autoComplete: 'organization' },
-      { label: 'Year Graduated', type: 'text', name: 'yearGraduated', id: 'yearGraduated', autoComplete: 'off' },
+      {
+        label: 'Degree',
+        type: 'text',
+        name: 'degree',
+        id: 'degree',
+        placeholder: 'First and Last Name',
+        autoComplete: 'education-level',
+      },
+      {
+        label: 'School',
+        type: 'text',
+        name: 'school',
+        id: 'school',
+        placeholder: 'First and Last Name',
+        autoComplete: 'organization',
+      },
+      {
+        label: 'Year Graduated',
+        type: 'text',
+        name: 'yearGraduated',
+        id: 'yearGraduated',
+        placeholder: 'First and Last Name',
+        autoComplete: 'off',
+      },
     ],
     experience: [
-      { label: 'Position', type: 'text', name: 'position', id: 'position', autoComplete: 'job-title' },
-      { label: 'Company', type: 'text', name: 'company', id: 'company', autoComplete: 'organization' },
-      { label: 'Years Worked', type: 'text', name: 'yearsWorked', id: 'yearsWorked', autoComplete: 'off' },
+      {
+        label: 'Position',
+        type: 'text',
+        name: 'position',
+        id: 'position',
+        placeholder: 'First and Last Name',
+        autoComplete: 'job-title',
+      },
+      {
+        label: 'Company',
+        type: 'text',
+        name: 'company',
+        id: 'company',
+        placeholder: 'First and Last Name',
+        autoComplete: 'organization',
+      },
+      {
+        label: 'Years Worked',
+        type: 'text',
+        name: 'yearsWorked',
+        id: 'yearsWorked',
+        placeholder: 'First and Last Name',
+        autoComplete: 'off',
+      },
     ],
   };
 
@@ -121,12 +190,26 @@ function App() {
               )}
             </div>
           </div>
-          <p>{educationData.degree}</p>
-          <p>{educationData.school}</p>
-          <p>{educationData.yearGraduated}</p>
-          <p>{experienceData.position}</p>
-          <p>{experienceData.company}</p>
-          <p>{experienceData.yearsWorked}</p>
+
+          <div className="p-10">
+            <div className="">
+              <h3 className="sub-header">Education</h3>
+              <div className="">
+                <p>{educationData.degree}</p>
+                <p>{educationData.school}</p>
+                <p>{educationData.yearGraduated}</p>
+              </div>
+            </div>
+
+            <div className="">
+              <h3 className="sub-header">Experience</h3>
+              <div className="">
+                <p>{experienceData.position}</p>
+                <p>{experienceData.company}</p>
+                <p>{experienceData.yearsWorked}</p>
+              </div>
+            </div>
+          </div>
         </section>
       ) : (
         <section className="w-0" />

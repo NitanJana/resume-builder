@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-const InputGroup = ({ label, type, name, id, autoComplete, value, onChange }) => {
+const InputGroup = ({ label, type, name, id, autoComplete, placeholder,value, onChange }) => {
   return (
     <div>
       <label htmlFor={id} className="label-primary">
@@ -13,6 +13,7 @@ const InputGroup = ({ label, type, name, id, autoComplete, value, onChange }) =>
         value={value}
         onChange={onChange}
         className="input-primary"
+        placeholder={placeholder}
       />
     </div>
   );
@@ -23,6 +24,7 @@ InputGroup.propTypes = {
   type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
   autoComplete: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func.isRequired,
