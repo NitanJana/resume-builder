@@ -10,7 +10,7 @@ const InfoDisplay = ({ title, icon }) => {
 
 InfoDisplay.propTypes = {
   title: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.element.isRequired,
 };
 
 export default InfoDisplay;

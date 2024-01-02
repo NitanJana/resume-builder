@@ -11,6 +11,8 @@ import AddressIcon from '../assets/address_icon.svg?react';
 import ContentCard from './ContentCard';
 import InfoDisplay from './InfoDisplay';
 
+import inputConfigurationsMap from './inputConfiguration';
+
 import '../styles/App.css';
 
 function App() {
@@ -24,16 +26,22 @@ function App() {
   });
 
   const [educationData, setEducationData] = useState({
-    degree: '',
     school: '',
-    yearGraduated: '',
+    degree: '',
+    startStudy: '',
+    endStudy: '',
+    locationStudy: '',
   });
 
   const [experienceData, setExperienceData] = useState({
     position: '',
     company: '',
-    yearsWorked: '',
+    startWork: '',
+    endWork: '',
+    locationWork: '',
+    descriptionWork: '',
   });
+  const [savedData, setSavedData] = useState([]);
 
   const handleChange = (event, dataSetter) => {
     const { name, value } = event.target;
@@ -49,97 +57,8 @@ function App() {
     }));
   };
 
-  const inputConfigurationsMap = {
-    personal: [
-      {
-        label: 'Full Name',
-        type: 'text',
-        name: 'fullName',
-        id: 'fullName',
-        placeholder: 'First and Last Name',
-        autoComplete: 'name',
-      },
-      {
-        label: 'Email',
-        type: 'email',
-        name: 'email',
-        id: 'email',
-        placeholder: 'Enter Email',
-        autoComplete: 'email',
-      },
-      {
-        label: 'Phone Number',
-        type: 'tel',
-        name: 'phoneNumber',
-        id: 'phoneNumber',
-        placeholder: 'Enter Phone Number',
-        autoComplete: 'tel',
-      },
-      {
-        label: 'Address',
-        type: 'text',
-        name: 'address',
-        id: 'address',
-        placeholder: 'City, Country',
-        autoComplete: 'street-address',
-      },
-    ],
-    education: [
-      {
-        label: 'Degree',
-        type: 'text',
-        name: 'degree',
-        id: 'degree',
-        placeholder: 'First and Last Name',
-        autoComplete: 'education-level',
-      },
-      {
-        label: 'School',
-        type: 'text',
-        name: 'school',
-        id: 'school',
-        placeholder: 'First and Last Name',
-        autoComplete: 'organization',
-      },
-      {
-        label: 'Year Graduated',
-        type: 'text',
-        name: 'yearGraduated',
-        id: 'yearGraduated',
-        placeholder: 'First and Last Name',
-        autoComplete: 'off',
-      },
-    ],
-    experience: [
-      {
-        label: 'Position',
-        type: 'text',
-        name: 'position',
-        id: 'position',
-        placeholder: 'First and Last Name',
-        autoComplete: 'job-title',
-      },
-      {
-        label: 'Company',
-        type: 'text',
-        name: 'company',
-        id: 'company',
-        placeholder: 'First and Last Name',
-        autoComplete: 'organization',
-      },
-      {
-        label: 'Years Worked',
-        type: 'text',
-        name: 'yearsWorked',
-        id: 'yearsWorked',
-        placeholder: 'First and Last Name',
-        autoComplete: 'off',
-      },
-    ],
-  };
-
   return (
-    <div className="w-full h-screen bg-gray-100 grid grid-cols-[1fr_5fr_8fr] font-poppins">
+    <div className="w-full h-full bg-gray-100 grid grid-cols-[1fr_5fr_8fr] font-poppins">
       <div className=""></div>
 
       <section className="p-8 flex flex-col gap-8 ">
@@ -151,6 +70,7 @@ function App() {
           inputConfigurations={inputConfigurationsMap.personal}
           formData={personalData}
           handleChange={(event) => handleChange(event, setPersonalData)}
+          onSaveData={(newData) => setSavedData([...savedData, newData])}
         />
 
         <ContentCard
@@ -161,6 +81,7 @@ function App() {
           inputConfigurations={inputConfigurationsMap.education}
           formData={educationData}
           handleChange={(event) => handleChange(event, setEducationData)}
+          onSaveData={(newData) => setSavedData([...savedData, newData])}
         />
 
         <ContentCard
@@ -171,6 +92,7 @@ function App() {
           inputConfigurations={inputConfigurationsMap.experience}
           formData={experienceData}
           handleChange={(event) => handleChange(event, setExperienceData)}
+          onSaveData={(newData) => setSavedData([...savedData, newData])}
         />
       </section>
 
@@ -194,20 +116,35 @@ function App() {
           <div className="p-10">
             <div className="">
               <h3 className="sub-header">Education</h3>
-              <div className="">
-                <p>{educationData.degree}</p>
-                <p>{educationData.school}</p>
-                <p>{educationData.yearGraduated}</p>
+              <div className="flex flex-col gap-4">
+                {savedData
+                  .filter((data) => data.type === 'Education')
+                  .map((data, index) => (
+                    <div key={`education-${index}`} className="">
+                      <p>{data.data.school}</p>
+                      <p>{data.data.degree}</p>
+                      <p>{data.data.startStudy}</p>
+                      <p>{data.data.endStudy}</p>
+                      <p>{data.data.locationStudy}</p>
+                    </div>
+                  ))}
               </div>
             </div>
 
             <div className="">
               <h3 className="sub-header">Experience</h3>
-              <div className="">
-                <p>{experienceData.position}</p>
-                <p>{experienceData.company}</p>
-                <p>{experienceData.yearsWorked}</p>
-              </div>
+              {savedData
+                .filter((data) => data.type === 'Experience')
+                .map((data, index) => (
+                  <div key={`experience-${index}`} className="">
+                    <p>{data.data.company}</p>
+                    <p>{data.data.position}</p>
+                    <p>{data.data.startWork}</p>
+                    <p>{data.data.endWork}</p>
+                    <p>{data.data.locationWork}</p>
+                    <p>{data.data.descriptionWork}</p>
+                  </div>
+                ))}
             </div>
           </div>
         </section>
