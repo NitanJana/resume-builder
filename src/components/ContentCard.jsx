@@ -12,10 +12,11 @@ const ContentCard = ({
   inputConfigurations,
   formData,
   handleChange,
+  savedData,
   onSaveData,
+  onDeleteData,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [savedData, setSavedData] = useState([]);
 
   const renderInputGroups = (inputConfigurations, formData, handleChange) => {
     return inputConfigurations.map(({ label, type, name, id, placeholder, autoComplete }) => (
@@ -37,10 +38,10 @@ const ContentCard = ({
     () => renderInputGroups(inputConfigurations, formData, handleChange),
     [inputConfigurations, formData, handleChange],
   );
+
   const handleSave = (event) => {
     event.preventDefault();
     const newData = { type: title, data: formData };
-    setSavedData([...savedData, newData]);
     onSaveData(newData);
     setIsExpanded(false);
   };
@@ -52,7 +53,7 @@ const ContentCard = ({
 
     if (title === 'Education' || title === 'Experience') {
       return isExpanded ? (
-        <form className="flex flex-col gap-3" onSubmit={handleSave}>
+        <form className="flex flex-col gap-3 transi" onSubmit={handleSave}>
           {memoizedRenderInputGroups}
           <button className="bg-slate-400" onClick={() => setIsExpanded(false)}>
             Cancel
@@ -62,24 +63,18 @@ const ContentCard = ({
           </button>
         </form>
       ) : (
-        <div className="flex flex-col items-center gap-4">
-          {title === 'Education'
-            ? savedData
-                .filter((data) => data.type === 'Education')
-                .map((data, index) => (
-                  <div key={`education-${index}`} className="">
-                    <p>{data.data.school}</p>
-                  </div>
-                ))
-            : title === 'Experience'
-              ? savedData
-                  .filter((data) => data.type === 'Experience')
-                  .map((data, index) => (
-                    <div key={`experience-${index}`} className="">
-                      <p>{data.data.company}</p>
-                    </div>
-                  ))
-              : null}
+        <div className="flex flex-col items-stretch gap-4">
+          {savedData
+            .filter((data) => data.type === title)
+            .map((data, index) => (
+              <div
+                key={`${title.toLowerCase()}-${index}`}
+                className="flex justify-between text-center bg-gray-300 rounded-lg p-2"
+              >
+                <p>{title === 'Education' ? data.data.school : data.data.company}</p>
+                <button onClick={() => onDeleteData(data.type, index)}>delete</button>
+              </div>
+            ))}
           <button className="add-button" onClick={() => setIsExpanded(true)}>
             {title}
           </button>
@@ -121,6 +116,8 @@ ContentCard.propTypes = {
   formData: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   onSaveData: PropTypes.func.isRequired,
+  savedData: PropTypes.array.isRequired,
+  onDeleteData: PropTypes.func.isRequired,
 };
 
 export default ContentCard;

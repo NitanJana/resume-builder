@@ -57,8 +57,13 @@ function App() {
     }));
   };
 
+  const handleDeleteData = (type, index) => {
+    const updatedData = savedData.filter((data) => !(data.type === type && savedData.indexOf(data) === index));
+    setSavedData(updatedData);
+  };
+
   return (
-    <div className="w-full h-full bg-gray-100 grid grid-cols-[1fr_5fr_8fr] font-poppins">
+    <div className="w-full min-h-screen bg-gray-100 grid grid-cols-[1fr_5fr_8fr] font-poppins">
       <div className=""></div>
 
       <section className="p-8 flex flex-col gap-8 ">
@@ -70,7 +75,9 @@ function App() {
           inputConfigurations={inputConfigurationsMap.personal}
           formData={personalData}
           handleChange={(event) => handleChange(event, setPersonalData)}
+          savedData={savedData}
           onSaveData={(newData) => setSavedData([...savedData, newData])}
+          onDeleteData={(type, index) => handleDeleteData(type, index)}
         />
 
         <ContentCard
@@ -81,7 +88,9 @@ function App() {
           inputConfigurations={inputConfigurationsMap.education}
           formData={educationData}
           handleChange={(event) => handleChange(event, setEducationData)}
+          savedData={savedData}
           onSaveData={(newData) => setSavedData([...savedData, newData])}
+          onDeleteData={(type, index) => handleDeleteData(type, index)}
         />
 
         <ContentCard
@@ -92,7 +101,9 @@ function App() {
           inputConfigurations={inputConfigurationsMap.experience}
           formData={experienceData}
           handleChange={(event) => handleChange(event, setExperienceData)}
+          savedData={savedData}
           onSaveData={(newData) => setSavedData([...savedData, newData])}
+          onDeleteData={(type, index) => handleDeleteData(type, index)}
         />
       </section>
 
