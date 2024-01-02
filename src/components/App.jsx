@@ -127,16 +127,24 @@ function App() {
           <div className="p-10">
             <div className="">
               <h3 className="sub-header">Education</h3>
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
                 {savedData
                   .filter((data) => data.type === 'Education')
                   .map((data, index) => (
-                    <div key={`education-${index}`} className="">
-                      <p>{data.data.school}</p>
-                      <p>{data.data.degree}</p>
-                      <p>{data.data.startStudy}</p>
-                      <p>{data.data.endStudy}</p>
-                      <p>{data.data.locationStudy}</p>
+                    <div key={`education-${index}`} className="flex gap-8 p-4">
+                      <div className="">
+                        <div className="flex flex-row">
+                          <p>{data.data.startStudy}</p>
+                          <span className="mx-2">-</span>
+                          <p>{data.data.endStudy}</p>
+                        </div>
+
+                        <p>{data.data.locationStudy}</p>
+                      </div>
+                      <div className="">
+                        <p className="font-bold">{data.data.school}</p>
+                        <p>{data.data.degree}</p>
+                      </div>
                     </div>
                   ))}
               </div>
@@ -144,18 +152,28 @@ function App() {
 
             <div className="">
               <h3 className="sub-header">Experience</h3>
-              {savedData
-                .filter((data) => data.type === 'Experience')
-                .map((data, index) => (
-                  <div key={`experience-${index}`} className="">
-                    <p>{data.data.company}</p>
-                    <p>{data.data.position}</p>
-                    <p>{data.data.startWork}</p>
-                    <p>{data.data.endWork}</p>
-                    <p>{data.data.locationWork}</p>
-                    <p>{data.data.descriptionWork}</p>
-                  </div>
-                ))}
+              <div className="flex flex-col gap-2">
+                {savedData
+                  .filter((data) => data.type === 'Experience')
+                  .map((data, index) => (
+                    <div key={`experience-${index}`} className="flex gap-8 p-4">
+                      <div className="">
+                        <div className="flex flex-row">
+                          <p>{data.data.startWork}</p>
+                          <span className="mx-2">-</span>
+                          <p>{data.data.endWork}</p>
+                        </div>
+
+                        <p>{data.data.locationWork}</p>
+                      </div>
+                      <div className="">
+                        <p className="font-bold">{data.data.company}</p>
+                        <p>{data.data.position}</p>
+                        <p>{data.data.descriptionWork}</p>
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </div>
           </div>
         </section>

@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import InputGroup from './InputGroup';
 import ExpandIcon from '../assets/expand_icon.svg?react';
 import ShrinkIcon from '../assets/shrink_icon.svg?react';
+import AddIcon from '../assets/add_icon.svg?react';
+import DeleteIcon from '../assets/delete_icon.svg?react';
 import { useState, useMemo } from 'react';
 
 const ContentCard = ({
@@ -48,34 +50,37 @@ const ContentCard = ({
 
   const renderForm = () => {
     if (title === 'Personal') {
-      return <form className="flex flex-col gap-3">{memoizedRenderInputGroups}</form>;
+      return <form className="flex flex-col gap-3 px-8 pb-4">{memoizedRenderInputGroups}</form>;
     }
 
     if (title === 'Education' || title === 'Experience') {
       return isExpanded ? (
-        <form className="flex flex-col gap-3 transi" onSubmit={handleSave}>
+        <form className="flex flex-col gap-3 px-8 pb-4" onSubmit={handleSave}>
           {memoizedRenderInputGroups}
-          <button className="bg-slate-400" onClick={() => setIsExpanded(false)}>
-            Cancel
-          </button>
-          <button className="bg-slate-400" type="submit">
-            Save
-          </button>
+          <div className="flex justify-end gap-4">
+            <button className="border-gray-300 border-2 rounded p-2 text-xs text-gray-600 font-bold" onClick={() => setIsExpanded(false)}>
+              Cancel
+            </button>
+            <button className="bg-blue-500 rounded py-2 outline-none text-white text-xs font-bold px-4" type="submit">
+              Save
+            </button>
+          </div>
         </form>
       ) : (
-        <div className="flex flex-col items-stretch gap-4">
+        <div className="flex flex-col items-stretch">
           {savedData
             .filter((data) => data.type === title)
             .map((data, index) => (
               <div
                 key={`${title.toLowerCase()}-${index}`}
-                className="flex justify-between text-center bg-gray-300 rounded-lg p-2"
+                className="flex justify-between text-center items-center border-gray-100 border-t-8 p-4"
               >
                 <p>{title === 'Education' ? data.data.school : data.data.company}</p>
-                <button onClick={() => onDeleteData(data.type, index)}>delete</button>
+                <DeleteIcon onClick={() => onDeleteData(data.type, index)} className="cursor-pointer" />
               </div>
             ))}
           <button className="add-button" onClick={() => setIsExpanded(true)}>
+            <AddIcon />
             {title}
           </button>
         </div>
@@ -85,7 +90,7 @@ const ContentCard = ({
 
   return (
     <div className="content-tab flex flex-col gap-4">
-      <div className="flex justify-between items-center cursor-pointer" onClick={handleExpandClick}>
+      <div className="flex justify-between items-center cursor-pointer m-8" onClick={handleExpandClick}>
         <div className="flex items-center gap-8">
           {icon}
           <h2 className="text-xl font-bold text-left text-blue-900">
